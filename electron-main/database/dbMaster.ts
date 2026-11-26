@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import { Worker } from 'worker_threads';
 import { v4 as uuidv4 } from 'uuid';
@@ -28,7 +29,12 @@ class DbMaster {
   private workerScriptPath: string;
 
   constructor() {
-    this.workerScriptPath = path.join(__dirname, 'dbWorker.js');
+    const defaultPath = path.join(__dirname, 'dbWorker.js');
+    const unpackedPath = defaultPath.replace('app.asar', 'app.asar.unpacked');
+    this.workerScriptPath =
+      unpackedPath !== defaultPath && fs.existsSync(unpackedPath)
+        ? unpackedPath
+        : defaultPath;
   }
 
   public init(userDataPath: string, customWorkerPath?: string) {
