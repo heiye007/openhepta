@@ -1,0 +1,6 @@
+allowBuilds:
+  better-sqlite3: true
+  core-js: false
+  electron: true
+  es5-ext: false
+  esbuild: true

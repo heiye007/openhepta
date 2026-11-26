@@ -1,0 +1,674 @@
+.hepta-editor-scope .native-prosemirror-container {
+  height: 100%;
+  outline: none;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100%;
+  outline: none;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  font-size: var(--editor-font-size, 16px);
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text-color);
+  caret-color: var(--active-item);
+  counter-reset: katexEqnNo;
+  padding-top: 2px;
+  padding-bottom: 14px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style.ProseMirror-readonly {
+  caret-color: transparent;
+  cursor: default;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style > * {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style > :first-child {
+  margin-top: 2px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style > :last-child {
+  margin-bottom: 12px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style p.is-empty::before,
+.hepta-editor-scope .ProseMirror-hepta-style .empty-node::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  color: var(--middle-grey);
+  font-weight: 400;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style p {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 3px 2px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style h1,
+.hepta-editor-scope .ProseMirror-hepta-style h2,
+.hepta-editor-scope .ProseMirror-hepta-style h3,
+.hepta-editor-scope .ProseMirror-hepta-style h4,
+.hepta-editor-scope .ProseMirror-hepta-style h5,
+.hepta-editor-scope .ProseMirror-hepta-style h6 {
+  line-height: 1.3;
+  padding: 3px 2px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style h1 > strong,
+.hepta-editor-scope .ProseMirror-hepta-style h2 > strong,
+.hepta-editor-scope .ProseMirror-hepta-style h3 > strong,
+.hepta-editor-scope .ProseMirror-hepta-style h4 > strong,
+.hepta-editor-scope .ProseMirror-hepta-style h5 > strong,
+.hepta-editor-scope .ProseMirror-hepta-style h6 > strong {
+  font-weight: 600;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style h1 {
+  font-size: 1.875em;
+  line-height: 1.3;
+  margin: 1.1em 0 0.25em 0;
+  letter-spacing: -0.02em;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style h2 {
+  font-size: 1.5em;
+  line-height: 1.3;
+  margin: 1em 0 0.25em 0;
+  letter-spacing: -0.015em;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style h3 {
+  font-size: 1.17em;
+  line-height: 1.3;
+  margin: 0.9em 0 0.25em 0;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style h4 {
+  font-size: 1.05em;
+  margin: 0.8em 0 0.2em 0;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style > h1:first-child,
+.hepta-editor-scope .ProseMirror-hepta-style > h2:first-child,
+.hepta-editor-scope .ProseMirror-hepta-style > h3:first-child {
+  margin-top: 0.15em;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style strong {
+  font-weight: 600;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style s {
+  text-decoration-thickness: 2px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style u,
+.hepta-editor-scope .ProseMirror-hepta-style span[data-underline] {
+  text-decoration: none;
+  border-bottom: 0.05em solid var(--text-color);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style mark {
+  color: var(--text-color);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style a.hepta-link {
+  border-bottom: 1px solid var(--active-item);
+  color: var(--active-item);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style a.hepta-link[data-internal-href],
+.hepta-editor-scope .ProseMirror-hepta-style a[data-hepta-link] {
+  border-bottom-color: var(--light-grey);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style blockquote {
+  margin: 4px 0;
+  padding: 2px 0.9em;
+  border-left: 3px solid currentColor;
+  color: var(--middle-hard-grey);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style blockquote > h1:first-child,
+.hepta-editor-scope .ProseMirror-hepta-style blockquote > h2:first-child,
+.hepta-editor-scope .ProseMirror-hepta-style blockquote > h3:first-child {
+  margin-top: 0.5rem;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style div.hepta-callout {
+  position: relative;
+  background: var(--ultra-light-grey);
+  border: 1px solid var(--light-grey);
+  border-radius: 6px;
+  padding: 10px 14px 10px 38px;
+  margin: 0.5em 0;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style div.hepta-callout::before {
+  content: attr(data-icon);
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  font-size: 15px;
+  line-height: 1.5;
+  cursor: pointer;
+  user-select: none;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style div.hepta-hr-wrap {
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style div.hepta-hr-wrap hr,
+.hepta-editor-scope .ProseMirror-hepta-style hr {
+  border: none;
+  border-bottom: 1px solid var(--light-middle-grey);
+  margin: 0;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style div.hepta-hr-wrap.ProseMirror-selectednode hr {
+  border-bottom-color: var(--active-item);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style code {
+  background: var(--ultra-light-grey);
+  border: 1px solid var(--light-grey);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 85%;
+  font-family: 'JetBrains Mono', SF Mono, Menlo, Consolas, PT Mono, Liberation Mono, Courier, monospace;
+  color: var(--active-item);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-code-block {
+  background-color: var(--ultra-light-grey);
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  margin: 0.55em 0;
+  overflow: hidden;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 10px;
+  border-bottom: 1px solid var(--light-grey);
+  user-select: none;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-code-lang {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--middle-grey);
+  cursor: pointer;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-code-lang:hover:not(:disabled) {
+  color: var(--text-color);
+  background: var(--light-grey);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-code-lang:disabled {
+  cursor: default;
+  appearance: none;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-code-copy {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--middle-hard-grey);
+  background: transparent;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  padding: 1px 8px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-code-block:hover .hepta-code-copy,
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-code-copy.is-copied {
+  opacity: 1;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-code-copy:hover {
+  background: var(--light-grey);
+  color: var(--text-color);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-code-copy.is-copied {
+  color: var(--successful-item);
+  border-color: var(--successful-item);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-code-block pre,
+.hepta-editor-scope .ProseMirror-hepta-style > pre {
+  background-color: var(--ultra-light-grey);
+  color: var(--text-color);
+  padding: 12px 16px 16px;
+  margin: 0;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', SF Mono, Menlo, Consolas, PT Mono, Liberation Mono, Courier, monospace;
+  font-size: 85%;
+  line-height: 1.55;
+  white-space: pre;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-code-block pre {
+  background: transparent;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--text-color);
+  font-size: inherit;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style ul:not([data-task-list]):not([data-toggle-list]) {
+  list-style-type: disc;
+  padding-left: 1.45rem;
+  margin: 1px 0;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style ol {
+  list-style-type: decimal;
+  padding-left: 1.45rem;
+  margin: 1px 0;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style li {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style li > p {
+  margin: 0;
+  padding: 2px 2px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style li > ul,
+.hepta-editor-scope .ProseMirror-hepta-style li > ol {
+  position: relative;
+  margin-top: 2px;
+  border-left: 1px solid var(--light-grey);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style li > ul[data-task-list],
+.hepta-editor-scope .ProseMirror-hepta-style li > ul[data-toggle-list] {
+  margin-left: 8px;
+  padding-left: 10px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style ul[data-toggle-list] {
+  list-style: none;
+  padding-left: 0;
+  margin: 1px 0;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style ul[data-toggle-list] > li {
+  position: relative;
+  padding-left: 22px;
+  margin: 1px 0;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style ul[data-toggle-list] > li::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  width: 0;
+  height: 0;
+  border-left: 4.5px solid transparent;
+  border-right: 4.5px solid transparent;
+  border-top: 5.5px solid var(--middle-grey);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-top-color 0.15s ease;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style ul[data-toggle-list] > li:hover::before {
+  border-top-color: var(--text-color);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style ul[data-toggle-list] > li[data-folded="true"]::before {
+  transform: rotate(-90deg);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style ul[data-toggle-list] > li[data-folded="true"] > :not(:first-child) {
+  display: none;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style ul[data-task-list] {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 1px 0;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style li.hepta-task-item {
+  list-style-type: none;
+  position: relative;
+  padding-left: 24px;
+  margin: 1px 0;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style li.hepta-task-item::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  border: 1.5px solid var(--middle-grey);
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.15s ease;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style li.hepta-task-item:hover::before {
+  border-color: var(--active-item);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style li.hepta-task-item[data-checked="true"]::before {
+  background-color: var(--active-item);
+  border-color: var(--active-item);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+  background-size: 11px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style li.hepta-task-item[data-checked="true"] > p:first-child {
+  color: var(--middle-grey);
+  text-decoration-line: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .tableWrapper {
+  position: relative;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  overflow-x: auto;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .tableWrapper::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .tableWrapper:hover::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style th,
+.hepta-editor-scope .ProseMirror-hepta-style td {
+  box-sizing: border-box;
+  position: relative;
+  min-width: 60px;
+  border: 1px solid var(--light-middle-grey);
+  padding: 4px 8px;
+  text-align: left;
+  vertical-align: top;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style th {
+  background-color: var(--light-grey);
+  font-weight: 500;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style th > p,
+.hepta-editor-scope .ProseMirror-hepta-style td > p {
+  margin: 0;
+  padding: 2px 0;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .selectedCell {
+  caret-color: transparent;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .selectedCell::selection {
+  background-color: transparent;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .selectedCell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--middle-transparent-blue);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .column-resize-handle {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -2px;
+  z-index: 10;
+  width: 3px;
+  background-color: var(--active-item);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style.resize-cursor {
+  cursor: col-resize;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .katex {
+  line-height: 19px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .katex-display {
+  margin: 0.75rem 0;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .katex-display .katex {
+  line-height: 1.2;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style math-inline.math-node,
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-math-inline {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: baseline;
+  padding: 0 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-math-inline:hover {
+  background: var(--ultra-light-grey);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style math-display.math-node,
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-math-display {
+  display: block;
+  margin: 0.6em 0;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: var(--ultra-light-grey);
+  border: 1px solid var(--light-grey);
+  overflow-x: auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .math-node.ProseMirror-selectednode {
+  outline: 1.5px solid var(--active-item);
+  background-color: var(--middle-transparent-blue);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-math-placeholder {
+  color: var(--middle-grey);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-math-editor-input,
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-math-editor-textarea {
+  font-family: 'JetBrains Mono', SF Mono, Menlo, Consolas, monospace;
+  font-size: 13px;
+  color: var(--text-color);
+  background: var(--background-secondary);
+  border: 1px solid var(--active-item);
+  border-radius: 4px;
+  outline: none;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-math-editor-input {
+  padding: 1px 6px;
+  min-width: 140px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-math-editor-textarea {
+  width: 100%;
+  min-height: 64px;
+  padding: 8px 10px;
+  resize: vertical;
+  text-align: left;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style figure.hepta-image-wrap {
+  margin: 0.6em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 6px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style figure.hepta-image-wrap img {
+  max-width: 100%;
+  border-radius: 6px;
+  display: block;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style figure.hepta-image-wrap.ProseMirror-selectednode img {
+  outline: 2px solid var(--active-item);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-media-fallback {
+  width: 100%;
+  padding: 16px 14px;
+  border-radius: 6px;
+  background: var(--ultra-light-grey);
+  border: 1px dashed var(--light-middle-grey);
+  color: var(--middle-hard-grey);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style div.hepta-video-wrap {
+  margin: 0.6em 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--light-grey);
+  background: var(--ultra-light-grey);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style div.hepta-video-wrap iframe,
+.hepta-editor-scope .ProseMirror-hepta-style div.hepta-video-wrap video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  border: none;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-card-chip,
+.hepta-editor-scope .ProseMirror-hepta-style .card-node {
+  display: inline-flex;
+  align-items: center;
+  background: var(--ultra-light-grey);
+  border: 1px solid var(--light-grey);
+  color: var(--active-item);
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  margin: 0 2px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-card-chip:hover,
+.hepta-editor-scope .ProseMirror-hepta-style .card-node:hover {
+  background: var(--light-grey);
+  border-color: var(--active-item);
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-whiteboard-chip,
+.hepta-editor-scope .ProseMirror-hepta-style .whiteboard-node,
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-pdf-chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--ultra-light-grey);
+  border: 1px solid var(--light-grey);
+  color: var(--text-color);
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+  font-weight: 500;
+  margin: 0 2px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-date-chip,
+.hepta-editor-scope .ProseMirror-hepta-style .date-node {
+  display: inline-flex;
+  align-items: center;
+  background: var(--ultra-light-grey);
+  border: 1px solid var(--light-grey);
+  color: var(--middle-hard-grey);
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+  font-weight: 500;
+  margin: 0 2px;
+}
+
+.hepta-editor-scope .ProseMirror-hepta-style .hepta-inline-tag {
+  background: var(--ultra-light-grey);
+  color: var(--active-item);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.92em;
+  font-weight: 500;
+}

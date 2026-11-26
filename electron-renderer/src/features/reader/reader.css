@@ -1,0 +1,92 @@
+.hepta-pdf-page .textLayer {
+  color-scheme: only light;
+  position: absolute;
+  text-align: initial;
+  inset: 0;
+  overflow: clip;
+  opacity: 1;
+  line-height: 1;
+  letter-spacing: normal;
+  word-spacing: normal;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  forced-color-adjust: none;
+  transform-origin: 0 0;
+  caret-color: CanvasText;
+  z-index: 2;
+  --min-font-size: 1;
+  --text-scale-factor: calc(var(--total-scale-factor) * var(--min-font-size));
+  --min-font-size-inv: calc(1 / var(--min-font-size));
+}
+
+.hepta-pdf-page .textLayer :is(span, br) {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.hepta-pdf-page .textLayer > :not(.markedContent),
+.hepta-pdf-page .textLayer .markedContent span:not(.markedContent) {
+  z-index: 1;
+  --font-height: 0;
+  font-size: calc(var(--text-scale-factor) * var(--font-height));
+  --scale-x: 1;
+  --rotate: 0deg;
+  transform: rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv));
+}
+
+.hepta-pdf-page .textLayer .markedContent {
+  display: contents;
+}
+
+.hepta-pdf-page .textLayer span[role="img"] {
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+.hepta-pdf-page .textLayer ::selection {
+  background: var(--text-selection-background, rgba(75, 155, 230, 0.35));
+  color: transparent;
+}
+
+.hepta-pdf-page .textLayer br::selection {
+  background: transparent;
+}
+
+.hepta-pdf-page .textLayer .endOfContent {
+  display: block;
+  position: absolute;
+  inset: 100% 0 0;
+  z-index: 0;
+  cursor: default;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.hepta-pdf-page .textLayer.selecting .endOfContent {
+  top: 0;
+}
+
+@keyframes heptaHighlightPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(32, 125, 255, 0.7);
+    transform: scale(1);
+  }
+  45% {
+    box-shadow: 0 0 0 6px rgba(32, 125, 255, 0.25);
+    transform: scale(1.015);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(32, 125, 255, 0);
+    transform: scale(1);
+  }
+}
+
+.hepta-highlight-pulse {
+  animation: heptaHighlightPulse 0.9s ease-out 2;
+}
